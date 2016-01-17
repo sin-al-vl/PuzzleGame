@@ -91,7 +91,7 @@ local function initializeBG()
 end
 
 local function initializePuzzleZone()
-	local puzzleZone = display.newImage( composer.getVariable("lvl").."\\puzZone.jpg")
+	local puzzleZone = display.newImage( composer.getVariable("lvl").."/puzzone.jpg")
 	puzzleZone.anchorX = 0
 	puzzleZone.anchorY = 0
 	puzzleZone:scale(indW*0.6, indH*0.6)
@@ -190,7 +190,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 	composer:removeHidden()
 
-	takeSound = audio.loadSound("sound\\CLICK.wav")
+	takeSound = audio.loadSound("sound/click.wav")
 
 	background = initializeBG()
 	puzzleZone = initializePuzzleZone()
@@ -198,15 +198,16 @@ function scene:create( event )
 	rightPuzzlesCount = 0
 
 	local dr, puzCoefficient
-	column, row, puzCoefficient, dr = readFromFile(composer.getVariable("lvl").."\\lvlInfo.txt")
+	column, row, puzCoefficient, dr = readFromFile(composer.getVariable("lvl").."/lvlinfo.txt")
 
 	local randomPos = generateCorrectRandomPlaces()
 
+	--puzzles creating
 	puz = {}
 	for i = 1, row do
 		for k = 1, column do
 			puz.newKey = {i..k}
-			puz[i..k] = display.newImage( composer.getVariable("lvl").."\\"..i..k..".png" )
+			puz[i..k] = display.newImage( composer.getVariable("lvl").."/"..i..k..".png" )
 			puz[i..k]:scale(indW*puzCoefficient, indH*puzCoefficient)
 
 			ind = generateCorrectIndex(randomPos)
